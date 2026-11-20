@@ -2,131 +2,158 @@ import sys
 from maya import cmds
 from PySide6 import QtWidgets
 from PySide6.QtCore import Qt
-from PySide6.QtWidgets import (QWidget, QGridLayout, QPushButton, QSpinBox, QLabel, QApplication, QHBoxLayout )
+from PySide6.QtWidgets import (QWidget, QGridLayout, QPushButton, QSpinBox, QLabel, QHBoxLayout, QGroupBox )
 
 class AnimationGenerator(QWidget):
     def __init__(self):
         super(). __init__()
 
         self.setWindowTitle("Random Animator Generator")
-        self.setMinimumWidth(350)
+        self.setMinimumWidth(450)
         self.setMinimumHeight(600)
 
-        self.create_ui()
-        #self.add_to_widget()
+        self.layout = QGridLayout(self)
 
-    def create_ui(self):
-        
+        self.animation_timing()
+        self.translate_parameters()
+        self.rotate_parameters()
+        self.scale_parameters()
+
         self.create_button = QPushButton("Create")
-        #widget = QWidget()
-        #widget.setLayout(layout)
-        #self.setCentralWidget(widget)
-
-        layout = QGridLayout(self)
-        spinbox = QSpinBox(self)
-        spinbox.setRange(0, 100)
-
-        layout1 = QHBoxLayout()
-        layout2 = QHBoxLayout()
-        layout3 = QHBoxLayout()
-
-        self.duration = QtWidgets.QSpinBox
-        self.step = QtWidgets.QSpinBox
-
-        self.translate_min_x = QtWidgets.QSpinBox
-        self.translate_min_y = QtWidgets.QSpinBox
-        self.translate_min_z = QtWidgets.QSpinBox
-        self.translate_max_x = QtWidgets.QSpinBox
-        self.translate_max_y = QtWidgets.QSpinBox
-        self.translate_max_z = QtWidgets.QSpinBox
-
-        self.rotate_min_x = QtWidgets.QSpinBox
-        self.rotate_min_y = QtWidgets.QSpinBox
-        self.rotate_min_z = QtWidgets.QSpinBox
-        self.rotate_max_x = QtWidgets.QSpinBox
-        self.rotate_max_y = QtWidgets.QSpinBox
-        self.rotate_max_z = QtWidgets.QSpinBox
-
-        self.scale_min_x = QtWidgets.QSpinBox
-        self.scale_min_y = QtWidgets.QSpinBox
-        self.scale_min_z = QtWidgets.QSpinBox
-        self.scale_max_x = QtWidgets.QSpinBox
-        self.scale_max_y = QtWidgets.QSpinBox
-        self.scale_max_z = QtWidgets.QSpinBox
+        self.layout.addWidget(self.create_button)
 
 
-        
+    def animation_timing(self):
+        animation = QGroupBox("Animation timing")
+        animation_layout = QGridLayout(animation)
 
-        self.obj = QtWidgets.QLineEdit("")
-        # self.posX = QtWidgets.QLineEdit("")
-        # self.posY = QtWidgets.QLineEdit("")
-        # self.posZ = QtWidgets.QLineEdit("")
-        # self.scale = QtWidgets.QLineEdit("")
+        self.duration = QSpinBox()
+        self.duration.setRange(0, 500)
 
-        # self.posX_max = QtWidgets.QLineEdit("")
-        # self.posY_max = QtWidgets.QLineEdit("")
-        # self.posZ_max = QtWidgets.QLineEdit("")
-        # self.scale_max = QtWidgets.QLineEdit("")
+        self.step = QSpinBox()
+        self.step.setRange(0, 500)
 
-        #self.obj.setFixedSize(100, 25)
-        # self.posX.setFixedSize(100, 25)
-        # self.posY.setFixedSize(100, 25)
-        # self.posZ.setFixedSize(100, 25)
-        # self.scale.setFixedSize(100, 25)
+        animation_layout.addWidget(QLabel("Duration (Frames):"), 0, 0)
+        animation_layout.addWidget(self.duration, 0, 1)
+        animation_layout.addWidget(QLabel("Steps (Frames):"), 0, 2)
+        animation_layout.addWidget(self.step, 0, 3)
 
-        # self.posX_max.setFixedSize(100, 25)
-        # self.posY_max.setFixedSize(100, 25)
-        # self.posZ_max.setFixedSize(100, 25)
-        # self.scale_max.setFixedSize(100, 25)
-        
-
-        layout.addWidget(QLabel("Duration (Frames)"), 1, 0)
-        layout.addWidget(QLabel('Steps (Frames)'), 2, 0)
-        # layout.addWidget(QLabel('Position Y'), 7, 0)
-        # layout.addWidget(QLabel('Position Z'), 9, 0)
-        # layout.addWidget(QLabel('Scale'), 11, 0)
-        # layout.addWidget(QLabel('min'), 3, 1)
-        # layout.addWidget(QLabel('max'), 3, 2)
-
-        #layout.addWidget(self.obj, 1, 1)
-        # layout.addWidget(self.posX, 5, 1)
-        # layout.addWidget(self.posY, 7, 1)
-        # layout.addWidget(self.posZ, 9, 1)
-        # layout.addWidget(self.scale, 11, 1)
-
-        # layout.addWidget(self.posX_max, 5, 2)
-        # layout.addWidget(self.posY_max, 7, 2)
-        # layout.addWidget(self.posZ_max, 9, 2)
-        # layout.addWidget(self.scale_max, 11, 2)
-
-        layout.addWidget(self.create_button)
-
-
-
-
-
-
-    # #def add_to_widget(self):
-
-    #     self.layout.addWidget(QLabel("Duration (Frames)"), 1, 0)
-    #     self.layout.addWidget(QLabel('Step (Frames)'), 5, 0)
-
-    #     self.layout.addWidget(self.duration, 1, 1)
-    #     self.layout.addWidget(self.step, 5, 1)
-
+        self.layout.addWidget(animation)
         
 
 
-def main():
-    global tool_window
-    try:
-        tool_window.close()
-    except Exception:
-        pass
-    tool_window = AnimationGenerator()
-    tool_window.show()
+    def translate_parameters(self):
+        translate = QGroupBox("Translate Parameters")
+        translate_layout = QGridLayout(translate)
 
-main()
+        self.translate_minX = QSpinBox()
+        self.translate_minX.setRange(0, 500)
 
-app = QApplication(sys.argv)
-app.exec()
+        self.translate_minY = QSpinBox()
+        self.translate_minY.setRange(0, 500)
+
+        self.translate_minZ = QSpinBox()
+        self.translate_minZ.setRange(0, 500)
+
+        self.translate_maxX = QSpinBox()
+        self.translate_maxX.setRange(0, 500)
+
+        self.translate_maxY = QSpinBox()
+        self.translate_maxY.setRange(0, 500)
+
+        self.translate_maxZ = QSpinBox()
+        self.translate_maxZ.setRange(0, 500)
+
+        translate_layout.addWidget(QLabel("min x :"), 0, 0)
+        translate_layout.addWidget(self.translate_minX, 0, 1)
+        translate_layout.addWidget(QLabel("min y :"), 0, 2)
+        translate_layout.addWidget(self.translate_minY, 0, 3)
+        translate_layout.addWidget(QLabel("min z :"), 0, 4)
+        translate_layout.addWidget(self.translate_minZ, 0, 5)
+
+        translate_layout.addWidget(QLabel("max x :"), 1, 0)
+        translate_layout.addWidget(self.translate_maxX, 1, 1)
+        translate_layout.addWidget(QLabel("max y :"), 1, 2)
+        translate_layout.addWidget(self.translate_maxY, 1, 3)
+        translate_layout.addWidget(QLabel("max z :"), 1, 4)
+        translate_layout.addWidget(self.translate_maxZ, 1, 5)
+
+        self.layout.addWidget(translate)
+
+
+    def rotate_parameters(self):
+        rotate = QGroupBox("Rotate Parameters")
+        rotate_layout = QGridLayout(rotate)
+
+        self.rotate_minX = QSpinBox()
+        self.rotate_minX.setRange(0, 500)
+
+        self.rotate_minY = QSpinBox()
+        self.rotate_minY.setRange(0, 500)
+
+        self.rotate_minZ = QSpinBox()
+        self.rotate_minZ.setRange(0, 500)
+
+        self.rotate_maxX = QSpinBox()
+        self.rotate_maxX.setRange(0, 500)
+
+        self.rotate_maxY = QSpinBox()
+        self.rotate_maxY.setRange(0, 500)
+
+        self.rotate_maxZ = QSpinBox()
+        self.rotate_maxZ.setRange(0, 500)
+
+        rotate_layout.addWidget(QLabel("min x :"), 0, 0)
+        rotate_layout.addWidget(self.rotate_minX, 0, 1)
+        rotate_layout.addWidget(QLabel("min y :"), 0, 2)
+        rotate_layout.addWidget(self.rotate_minY, 0, 3)
+        rotate_layout.addWidget(QLabel("min z :"), 0, 4)
+        rotate_layout.addWidget(self.rotate_minZ, 0, 5)
+
+        rotate_layout.addWidget(QLabel("max x :"), 1, 0)
+        rotate_layout.addWidget(self.rotate_maxX, 1, 1)
+        rotate_layout.addWidget(QLabel("max y :"), 1, 2)
+        rotate_layout.addWidget(self.rotate_maxY, 1, 3)
+        rotate_layout.addWidget(QLabel("max z :"), 1, 4)
+        rotate_layout.addWidget(self.rotate_maxZ, 1, 5)
+
+        self.layout.addWidget(rotate)
+
+
+    def scale_parameters(self):
+        scale = QGroupBox("Rotation Parameters")
+        scale_layout = QGridLayout(scale)
+
+        self.scale_minX = QSpinBox()
+        self.scale_minX.setRange(0, 500)
+
+        self.scale_minY = QSpinBox()
+        self.scale_minY.setRange(0, 500)
+
+        self.scale_minZ = QSpinBox()
+        self.scale_minZ.setRange(0, 500)
+
+        self.scale_maxX = QSpinBox()
+        self.scale_maxX.setRange(0, 500)
+
+        self.scale_maxY = QSpinBox()
+        self.scale_maxY.setRange(0, 500)
+
+        self.scale_maxZ = QSpinBox()
+        self.scale_maxZ.setRange(0, 500)
+
+        scale_layout.addWidget(QLabel("min x :"), 0, 0)
+        scale_layout.addWidget(self.scale_minX, 0, 1)
+        scale_layout.addWidget(QLabel("min y :"), 0, 2)
+        scale_layout.addWidget(self.scale_minY, 0, 3)
+        scale_layout.addWidget(QLabel("min z :"), 0, 4)
+        scale_layout.addWidget(self.scale_minZ, 0, 5)
+
+        scale_layout.addWidget(QLabel("max x :"), 1, 0)
+        scale_layout.addWidget(self.scale_maxX, 1, 1)
+        scale_layout.addWidget(QLabel("max y :"), 1, 2)
+        scale_layout.addWidget(self.scale_maxY, 1, 3)
+        scale_layout.addWidget(QLabel("max z :"), 1, 4)
+        scale_layout.addWidget(self.scale_maxZ, 1, 5)
+
+        self.layout.addWidget(scale)       
