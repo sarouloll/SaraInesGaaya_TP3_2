@@ -1,8 +1,5 @@
-import sys
-from maya import cmds
-from PySide6 import QtWidgets
-from PySide6.QtCore import Qt
-from PySide6.QtWidgets import (QWidget, QGridLayout, QPushButton, QSpinBox, QLabel, QHBoxLayout, QGroupBox )
+import animator
+from PySide6.QtWidgets import (QWidget, QGridLayout, QPushButton, QSpinBox, QLabel, QGroupBox )
 
 class AnimationGenerator(QWidget):
     def __init__(self):
@@ -21,6 +18,7 @@ class AnimationGenerator(QWidget):
 
         self.create_button = QPushButton("Create")
         self.layout.addWidget(self.create_button)
+        self.create_button.clicked.connect(self.on_clicked)
 
 
     def animation_timing(self):
@@ -40,7 +38,6 @@ class AnimationGenerator(QWidget):
 
         self.layout.addWidget(animation)
         
-
 
     def translate_parameters(self):
         translate = QGroupBox("Translate Parameters")
@@ -157,3 +154,18 @@ class AnimationGenerator(QWidget):
         scale_layout.addWidget(self.scale_maxZ, 1, 5)
 
         self.layout.addWidget(scale)       
+
+
+    def on_clicked(self):
+        # Cherche la valeur entrée dans les boites
+        #duration = self.duration_spin.value()  
+        #animator.create_animation(duration)
+        #animator.translation_animation(self)
+
+        animator.translation_animation(self)
+        animator.rotation_animation(self)
+        animator.scale_animation(self)
+        #self.count += 1
+        #self.button.setText(f"Count: {self.count}")
+
+
