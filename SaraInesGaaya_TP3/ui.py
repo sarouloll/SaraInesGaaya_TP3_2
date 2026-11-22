@@ -5,17 +5,18 @@ class AnimationGenerator(QWidget):
     def __init__(self):
         super(). __init__()
 
+        # Configuration standard de la fenêtre
         self.setWindowTitle("Random Animator Generator")
         self.setMinimumWidth(450)
         self.setMinimumHeight(600)
-
         self.layout = QGridLayout(self)
 
+        # Fonctions à ajouter à la fenêtre
         self.animation_timing()
         self.translate_parameters()
         self.rotate_parameters()
         self.scale_parameters()
-
+        # Ajout du bouton de création et liaison 
         self.create_button = QPushButton("Create")
         self.layout.addWidget(self.create_button)
         self.create_button.clicked.connect(self.on_clicked)
@@ -118,7 +119,7 @@ class AnimationGenerator(QWidget):
 
 
     def scale_parameters(self):
-        scale = QGroupBox("Rotation Parameters")
+        scale = QGroupBox("Scale Parameters")
         scale_layout = QGridLayout(scale)
 
         self.scale_minX = QSpinBox()
@@ -157,15 +158,8 @@ class AnimationGenerator(QWidget):
 
 
     def on_clicked(self):
-        # Cherche la valeur entrée dans les boites
-        #duration = self.duration_spin.value()  
-        #animator.create_animation(duration)
-        #animator.translation_animation(self)
+        # Execute la fonction dans animator.py
+        animator.create_animation(self)
 
-        animator.translation_animation(self)
-        animator.rotation_animation(self)
-        animator.scale_animation(self)
-        #self.count += 1
-        #self.button.setText(f"Count: {self.count}")
 
 

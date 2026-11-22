@@ -1,11 +1,20 @@
 import importlib
-from os import path
+import os
+import sys
+
+# Trouve manuellement le path pour éviter les erreurs de communications entre modules
+a_path = os.path.abspath(__file__)
+a_folder_path = os.path.dirname(a_path)
+sys.path.append(a_folder_path)
+
+# Imports, doit mettre après le folder path
 import animator
 import ui
 importlib.reload(ui)
 importlib.reload(animator)
 
 
+# Éxécution principale du programme
 def main():
     global tool_window
     try:
