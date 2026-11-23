@@ -32,6 +32,7 @@ class AnimationGenerator(QWidget):
         self.step = QSpinBox()
         self.step.setRange(0, 500)
 
+        # Ajout à l'interface 
         animation_layout.addWidget(QLabel("Duration (Frames):"), 0, 0)
         animation_layout.addWidget(self.duration, 0, 1)
         animation_layout.addWidget(QLabel("Steps (Frames):"), 0, 2)
@@ -62,6 +63,7 @@ class AnimationGenerator(QWidget):
         self.translate_maxZ = QSpinBox()
         self.translate_maxZ.setRange(0, 500)
 
+        # Ajout à l'interface 
         translate_layout.addWidget(QLabel("min x :"), 0, 0)
         translate_layout.addWidget(self.translate_minX, 0, 1)
         translate_layout.addWidget(QLabel("min y :"), 0, 2)
@@ -101,6 +103,7 @@ class AnimationGenerator(QWidget):
         self.rotate_maxZ = QSpinBox()
         self.rotate_maxZ.setRange(0, 500)
 
+        # Ajout à l'interface 
         rotate_layout.addWidget(QLabel("min x :"), 0, 0)
         rotate_layout.addWidget(self.rotate_minX, 0, 1)
         rotate_layout.addWidget(QLabel("min y :"), 0, 2)
@@ -140,6 +143,7 @@ class AnimationGenerator(QWidget):
         self.scale_maxZ = QSpinBox()
         self.scale_maxZ.setRange(0, 500)
 
+        # Ajout à l'interface 
         scale_layout.addWidget(QLabel("min x :"), 0, 0)
         scale_layout.addWidget(self.scale_minX, 0, 1)
         scale_layout.addWidget(QLabel("min y :"), 0, 2)

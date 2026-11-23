@@ -7,7 +7,7 @@ a_path = os.path.abspath(__file__)
 a_folder_path = os.path.dirname(a_path)
 sys.path.append(a_folder_path)
 
-# Imports, doit mettre après le folder path
+# Imports de modules, doit mettre après le folder path sinon erreur 
 import animator
 import ui
 importlib.reload(ui)
